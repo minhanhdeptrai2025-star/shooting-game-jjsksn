@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shooting-game-jjsksn</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Menu -->
+  <div id="menu">
+    <h1>SHOOTING GAME HUB</h1>
+    <div id="uidDisplay" style="margin: 6px 0; font-size: 10px; color: #00ffff;">UID: <span id="userUid">-</span></div>
+    <button id="startBtn" class="retro-btn">START GAME</button>
+    <button id="shopBtn" class="retro-btn">SHOP</button>
+    <button id="settingsBtn" class="retro-btn">SETTINGS</button>
+    <button id="miniGameBtn" class="retro-btn">MINI GAME</button>
+    <button id="adminUnlockBtn" class="retro-btn" style="background: #9900ff; margin-top: 10px; display: none;">UNLOCK ADMIN (10000)</button>
+    <button id="adminBtn" class="retro-btn" style="background: #ff00ff; display: none;">ADMIN</button>
+    <button id="exitBtn" class="retro-btn" style="background: #ff0000; margin-top: 20px;">EXIT</button>
+  </div>
+
+  <!-- Game -->
+  <div id="game">
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- HOME (HUD) - SHOOTING HUB -->
+    <div id="hud">
+      <div class="hud-section" style="text-align: center; margin-bottom: 15px;">
+        <div class="label" style="font-size: 14px; color: #ffff00;">SHOOTING HUB</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">HEALTH</div>
+        <div id="hpBar">
+          <div id="hp"></div>
+          <div id="hpText">100/100</div>
+        </div>
+      </div>
+      <div class="hud-section">
+        <div class="label">COINS</div>
+        <div id="goldText">100</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">WAVE</div>
+        <div id="waveText">1</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">WEAPON</div>
+        <div id="weaponText">Pistol</div>
+        <div id="ammoText">∞</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">ALLIES</div>
+        <div id="alliesText">2/5</div>
+        <div id="alliesDisplay" style="margin-top: 8px; font-size: 9px; color: #00ff00;"></div>
+      </div>
+      <div class="hud-section">
+        <div class="label">KILLS</div>
+        <div id="killsText">0</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">UID</div>
+        <div id="uidText">-</div>
+      </div>
+      <button id="pauseBtn" class="retro-btn small">PAUSE</button>
+    </div>
+
+    <!-- Domain UI -->
+    <div id="domainUI">
+      <div class="domain-slot" data-domain="1">Top 1</div>
+      <div class="domain-slot" data-domain="2">Top 2</div>
+      <div class="domain-slot" data-domain="3">Top 3</div>
+      <div class="domain-slot" data-domain="4">Top 4</div>
+      <div class="domain-slot" data-domain="5">Top 5</div>
+      <div class="domain-slot" data-domain="6">Top 6</div>
+      <div class="domain-slot" data-domain="7">Top 7</div>
+      <div class="domain-slot" data-domain="8">Top 8</div>
+      <div class="domain-slot" data-domain="9">Top 9</div>
+      <div class="domain-slot" data-domain="10">Top 10</div>
+    </div>
+
+    <!-- Weapon Wheel -->
+    <div id="weaponWheel" style="display: none;">
+      <div class="weapon-category">
+        <h3>Ballistic</h3>
+        <button data-weapon="pistol">Pistol</button>
+        <button data-weapon="dual-beretta">Dual Berettas</button>
+        <button data-weapon="revolver">Revolver</button>
+        <button data-weapon="uzi">Uzi</button>
+        <button data-weapon="ak47">AK-47</button>
+      </div>
+      <div class="weapon-category">
+        <h3>Heavy Duty</h3>
+        <button data-weapon="shotgun">Shotgun</button>
+        <button data-weapon="auto-shotgun">Auto-Shotgun</button>
+        <button data-weapon="minigun">Minigun</button>
+        <button data-weapon="sniper">Sniper</button>
+        <button data-weapon="anti-material">Anti-Material Rifle</button>
+      </div>
+      <div class="weapon-category">
+        <h3>Explosive</h3>
+        <button data-weapon="grenade-launcher">Grenade Launcher</button>
+        <button data-weapon="rpg">RPG-7</button>
+        <button data-weapon="flamethrower">Flamethrower</button>
+        <button data-weapon="toxic-spitter">Toxic Spitter</button>
+        <button data-weapon="cluster-launcher">Cluster Launcher</button>
+      </div>
+      <div class="weapon-category">
+        <h3>Sci-Fi</h3>
+        <button data-weapon="laser-rifle">Laser Rifle</button>
+        <button data-weapon="plasma-gun">Plasma Gun</button>
+        <button data-weapon="tesla-cannon">Tesla Cannon</button>
+        <button data-weapon="gravity-gun">Gravity Gun</button>
+        <button data-weapon="black-hole-gun">Black Hole Gun</button>
+      </div>
+    </div>
+
+  
+    <div id="bombUI">
+      <button class="bomb-btn" data-bomb="smoke">💨</button>
+      <button class="bomb-btn" data-bomb="fire">🔥</button>
+      <button class="bomb-btn" data-bomb="gravity">🌀</button>
+      <button class="bomb-btn" data-bomb="nuke">☢️</button>
+    </div>
+
+    <!-- Vehicle UI -->
+    <div id="vehicleUI" style="display: none;">
+      <button id="exitVehicle">Exit Vehicle</button>
+      <div id="vehicleHP">Vehicle HP: 100</div>
+    </div>
+  </div>
+
+  <!-- Shop -->
+  <div id="shop" style="display: none;">
+    <h2>SHOP</h2>
+    <div class="shop-tabs">
+      <button class="tab-btn active" data-tab="avatars">AVATARS</button>
+      <button class="tab-btn" data-tab="weapons">WEAPONS</button>
+      <button class="tab-btn" data-tab="allies">ALLIES</button>
+      <button class="tab-btn" data-tab="upgrades">UPGRADES</button>
+    </div>
+    
+    <div class="tab-content active" data-tab="avatars">
+      <h3>SELECT AVATAR (50 COINS)</h3>
+      <div class="avatar-grid-shop">
+        <button class="avatar-shop-item" data-avatar="square" data-price="50" style="background: #00ff00;">■ Square<br><small>50¢</small></button>
+        <button class="avatar-shop-item" data-avatar="triangle" data-price="50" style="background: #ff0000;">▲ Triangle<br><small>50¢</small></button>
+        <button class="avatar-shop-item" data-avatar="circle" data-price="50" style="background: #0088ff;">● Circle<br><small>50¢</small></button>
+        <button class="avatar-shop-item" data-avatar="diamond" data-price="50" style="background: #ffff00;">◆ Diamond<br><small>50¢</small></button>
+        <button class="avatar-shop-item" data-avatar="star" data-price="50" style="background: #ff00ff;">★ Star<br><small>50¢</small></button>
+        <button class="avatar-shop-item" data-avatar="cube" data-price="50" style="background: #00ffff;">◣ Cube<br><small>50¢</small></button>
+        <button class="avatar-shop-item" data-avatar="hexagon" data-price="75" style="background: #ff8800;">⬡ Hexagon<br><small>75¢</small></button>
+        <button class="avatar-shop-item" data-avatar="pentagon" data-price="75" style="background: #ff0088;">⬠ Pentagon<br><small>75¢</small></button>
+        <button class="avatar-shop-item" data-avatar="oval" data-price="75" style="background: #00ff88;">◯ Oval<br><small>75¢</small></button>
+        <button class="avatar-shop-item" data-avatar="crescent" data-price="100" style="background: #ff00ff;">☽ Crescent<br><small>100¢</small></button>
+        <button class="avatar-shop-item" data-avatar="heart" data-price="100" style="background: #ff1493;">❤ Heart<br><small>100¢</small></button>
+        <button class="avatar-shop-item" data-avatar="crown" data-price="150" style="background: #ffdd00;">♔ Crown<br><small>150¢</small></button>
+      </div>
+      <div style="text-align: center; margin-top: 20px; color: #ffff00;">
+        Current Avatar: <span id="currentAvatarShop">Square</span>
+      </div>
+    </div>
+    
+    <div class="tab-content" data-tab="weapons">
+      <h3>WEAPONS (100 COINS EACH)</h3>
+      <div id="weaponShop" class="weapon-grid">
+        <button class="shop-item" data-weapon="dual-beretta" data-price="100">Dual Berettas - 100¢</button>
+        <button class="shop-item" data-weapon="revolver" data-price="100">Revolver - 100¢</button>
+        <button class="shop-item" data-weapon="uzi" data-price="100">Uzi - 100¢</button>
+        <button class="shop-item" data-weapon="ak47" data-price="100">AK-47 - 100¢</button>
+        <button class="shop-item" data-weapon="shotgun" data-price="100">Shotgun - 100¢</button>
+        <button class="shop-item" data-weapon="auto-shotgun" data-price="100">Auto-Shotgun - 100¢</button>
+        <button class="shop-item" data-weapon="minigun" data-price="100">Minigun - 100¢</button>
+        <button class="shop-item" data-weapon="sniper" data-price="100">Sniper - 100¢</button>
+        <button class="shop-item" data-weapon="rpg" data-price="100">RPG-7 - 100¢</button>
+        <button class="shop-item" data-weapon="flamethrower" data-price="100">Flamethrower - 100¢</button>
+      </div>
+    </div>
+    
+    <div class="tab-content" data-tab="allies">
+      <h3>HIRE ALLIES (Max 5)</h3>
+      <button class="shop-item" id="buyMedic" data-ally="medic" data-price="200">Medic (Heals 5 HP/s) - 200¢</button>
+      <button class="shop-item" id="buyGunner" data-ally="gunner" data-price="300">Gunner (High DPS) - 300¢</button>
+      <button class="shop-item" id="buyTank" data-ally="tank" data-price="500">Tank (Shield) - 500¢</button>
+      <button class="shop-item" id="buySniper" data-ally="sniper" data-price="400">Sniper (Long Range) - 400¢</button>
+    </div>
+    
+    <div class="tab-content" data-tab="upgrades">
+      <h3>UPGRADES</h3>
+      <button class="shop-item" data-upgrade="hp" data-price="150">Max HP +50 - 150¢</button>
+      <button class="shop-item" data-upgrade="damage" data-price="200">Damage +10% - 200¢</button>
+      <button class="shop-item" data-upgrade="speed" data-price="180">Speed +20% - 180¢</button>
+      <button class="shop-item" data-upgrade="firerate" data-price="250">Fire Rate +15% - 250¢</button>
+      <button class="shop-item" id="buyAdminAccess" data-admin="unlock" data-price="10000" style="background:#9900ff;">ADMIN ACCESS - 10000¢</button>
+    </div>
+    
+    <div class="shop-footer">
+      <div class="gold-display">COINS: <span id="shopGold">0</span></div>
+      <button id="closeShop" class="retro-btn">CLOSE</button>
+    </div>
+  </div>
+
+  <!-- Admin Console -->
+  <div id="adminConsole" style="display: none;">
+    <h3>Admin Console (Level: <span id="adminLevel">0</span>)</h3>
+    <input type="text" id="consoleInput" placeholder="Enter command...">
+    <button id="executeCmd">Execute</button>
+    <div id="consoleOutput"></div>
+    <button id="closeConsole">Close (~)</button>
+  </div>
+
+  <!-- Pause Menu -->
+  <div id="pauseMenu" style="display: none;">
+    <h2>PAUSED</h2>
+    <button id="resumeBtn" class="retro-btn">RESUME</button>
+    <button id="shopPauseBtn" class="retro-btn">SHOP</button>
+    <button id="settingsPauseBtn" class="retro-btn">SETTINGS</button>
+    <button id="quitBtn" class="retro-btn">QUIT GAME</button>
+  </div>
+
+  <!-- Game Over -->
+  <div id="gameover" style="display: none;">
+    <h1>GAME OVER</h1>
+    <div class="stats">
+      <p>WAVE REACHED: <span id="finalWave">0</span></p>
+      <p>COINS EARNED: <span id="finalGold">0</span></p>
+      <p>ENEMIES KILLED: <span id="finalKills">0</span></p>
+    </div>
+    <button class="retro-btn" onclick="location.reload()">PLAY AGAIN</button>
+    <button class="retro-btn" onclick="location.reload()">MAIN MENU</button>
+  </div>
+
+  <!-- Domain Effect Overlay -->
+  <div id="domainEffect" style="display: none;"></div>
+
+  <!-- Mini Game -->
+  <div id="miniGame" style="display: none;">
+    <h2>MINI GAME - COLLECT COINS</h2>
+    <canvas id="miniGameCanvas" width="600" height="400" style="border: 4px solid #fff; background: #000; margin: 20px auto; display: block;"></canvas>
+    <div style="text-align: center; margin-top: 20px;">
+      <p>Score: <span id="miniGameScore">0</span></p>
+      <button id="miniGameClose" class="retro-btn">BACK TO MENU</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
