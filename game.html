@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shooting game!</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M20 4c0-1.1-.9-2-2-2h-8l-2-2H2C.9 0 0 .9 0 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4z'/><circle cx='14' cy='12' r='3.5' fill='%23ffaa00'/><path d='M8 18c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm10-5l-5 5v-3h-4v-4h4v-3l5 5z' fill='%23ffaa00'/></svg>">
+</head>
+<body>
+  <div id="githubLinks">
+    <button id="github1" class="github-btn">
+      <svg class="github-logo" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+    </button>
+    <button id="github2" class="github-btn">
+      <svg class="github-logo" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+       </button>
+  </div>
+
+  <div id="menu">
+    <h1>HOME</h1>
+    <button id="startBtn" class="retro-btn">START</button>
+    <button id="shopBtn" class="retro-btn">SHOP</button>
+    <button id="bonusBtn" class="retro-btn" style="background: #ffaa00;">DAILY BONUS</button>
+    <button id="miniGameBtn" class="retro-btn">MINI GAME</button>
+    <button id="adminUnlockBtn" class="retro-btn" style="background: #9900ff; display: none;">UNLOCK</button>
+    <button id="adminBtn" class="retro-btn" style="background: #ff00ff; display: none;">ADMIN</button>
+    <button id="exitBtn" class="retro-btn" style="background: #ff0000;">EXIT</button>
+  </div>
+
+  <div id="dailyBonusModal" style="display: none;">
+    <div class="daily-bonus-container">
+      <h2>20-DAY REWARDS</h2>
+      <div class="daily-bonus-calendar">
+        <div class="daily-day" id="day0" data-day="0"></div>
+        <div class="daily-day" id="day1" data-day="1"></div>
+        <div class="daily-day" id="day2" data-day="2"></div>
+        <div class="daily-day" id="day3" data-day="3"></div>
+        <div class="daily-day" id="day4" data-day="4"></div>
+        <div class="daily-day" id="day5" data-day="5"></div>
+        <div class="daily-day" id="day6" data-day="6"></div>
+        <div class="daily-day" id="day7" data-day="7"></div>
+        <div class="daily-day" id="day8" data-day="8"></div>
+        <div class="daily-day" id="day9" data-day="9"></div>
+        <div class="daily-day" id="day10" data-day="10"></div>
+        <div class="daily-day" id="day11" data-day="11"></div>
+        <div class="daily-day" id="day12" data-day="12"></div>
+        <div class="daily-day" id="day13" data-day="13"></div>
+        <div class="daily-day" id="day14" data-day="14"></div>
+        <div class="daily-day" id="day15" data-day="15"></div>
+        <div class="daily-day" id="day16" data-day="16"></div>
+        <div class="daily-day" id="day17" data-day="17"></div>
+        <div class="daily-day" id="day18" data-day="18"></div>
+        <div class="daily-day" id="day19" data-day="19"></div>
+      </div>
+      <div class="daily-bonus-info">
+        <p id="dailyBonusMessage">Collect daily rewards!</p>
+      </div>
+      <button id="closeDailyBonus" class="retro-btn">CLOSE</button>
+    </div>
+  </div>
+
+  <div id="game">
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="hud">
+      <div class="hud-section" style="text-align: center; margin-bottom: 15px;">
+        <div class="label" style="font-size: 14px; color: #ffff00;">Match</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">HEALTH</div>
+        <div id="hpBar">
+          <div id="hp"></div>
+          <div id="hpText">100/100</div>
+        </div>
+      </div>
+      <div class="hud-section">
+        <div class="label">COINS</div>
+        <div id="goldText">100</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">WAVE</div>
+        <div id="waveText">1</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">WEAPON</div>
+        <div id="weaponText">Pistol</div>
+        <div id="ammoText">∞</div>
+      </div>
+      <div class="hud-section">
+        <div class="label">ALLIES</div>
+        <div id="alliesText">2/5</div>
+        <div id="alliesDisplay" style="margin-top: 8px; font-size: 9px; color: #00ff00;"></div>
+      </div>
+      <div class="hud-section">
+        <div class="label">KILLS</div>
+        <div id="killsText">0</div>
+      </div>
+      <div class="hud-section" style="background: #ffff00; color: #000; border-radius: 5px; padding: 8px;">
+        <div id="comboText" style="font-size: 16px; font-weight: bold;"></div>
+      </div>
+      <div class="hud-section" style="background: #ff4400; color: #fff; border-radius: 5px; padding: 8px;">
+        <div id="streakText" style="font-size: 14px; font-weight: bold;"></div>
+      </div>
+      <button id="pauseBtn" class="retro-btn small">PAUSE</button>
+      <button id="equipBtn" class="retro-btn small" style="background: #0088ff; margin-top: 5px; width: 100%;">EQUIP</button>
+      <button id="surrenderBtn" class="retro-btn small" style="background: #ff0000; margin-top: 5px; width: 100%;">SURRENDER (-10¢)</button>
+    </div>
+
+    <div id="badgesUI" class="badges-container">
+      <div class="badge" data-badge="1" title="First Blood - Kill 10 enemies">🔴</div>
+      <div class="badge" data-badge="2" title="Killer - Kill 50 enemies">⚫</div>
+      <div class="badge" data-badge="3" title="Slayer - Kill 100 enemies">💀</div>
+      <div class="badge" data-badge="4" title="Boss Slayer - Defeat 5 bosses">👑</div>
+      <div class="badge" data-badge="5" title="Wave Survivor - Reach wave 10">🌊</div>
+      <div class="badge" data-badge="6" title="Survivor - Reach wave 20">🏆</div>
+      <div class="badge" data-badge="7" title="Champion - Win the game">🥇</div>
+      <div class="badge" data-badge="8" title="Collector - Get 5000 coins">💰</div>
+      <div class="badge" data-badge="9" title="Rich - Get 20000 coins">💵</div>
+      <div class="badge" data-badge="10" title="Sharpshooter - 50 headshots">🎯</div>
+      <div class="badge" data-badge="11" title="Critical Master - 30 critical hits">⚡</div>
+      <div class="badge" data-badge="12" title="Combo King - 10x combo">🔥</div>
+      <div class="badge" data-badge="13" title="Speed Runner - Win in 30 minutes">⏱️</div>
+      <div class="badge" data-badge="14" title="Ally Master - Hire 5 allies">👥</div>
+      <div class="badge" data-badge="15" title="Arsenal - Own 10 weapons">🔫</div>
+      <div class="badge" data-badge="16" title="Survivor Elite - Reach wave 30">🛡️</div>
+      <div class="badge" data-badge="17" title="Lucky - Get 10 pickups">🎁</div>
+      <div class="badge" data-badge="18" title="Unstoppable - Kill enemies without taking damage">✨</div>
+      <div class="badge" data-badge="19" title="Legend - Get 100000 total coins">👑</div>
+      <div class="badge" data-badge="20" title="God Mode - Beat game on hard">🌟</div>
+    </div>
+
+    <div id="weaponWheel" style="display: none;">
+      <div class="weapon-category">
+        <h3>Ballistic</h3>
+        <button data-weapon="pistol">Pistol</button>
+        <button data-weapon="dual-beretta">Dual Berettas</button>
+        <button data-weapon="revolver">Revolver</button>
+        <button data-weapon="uzi">Uzi</button>
+        <button data-weapon="ak47">AK-47</button>
+      </div>
+      <div class="weapon-category">
+        <h3>Heavy Duty</h3>
+        <button data-weapon="shotgun">Shotgun</button>
+        <button data-weapon="auto-shotgun">Auto-Shotgun</button>
+        <button data-weapon="minigun">Minigun</button>
+        <button data-weapon="sniper">Sniper</button>
+        <button data-weapon="anti-material">Anti-Material Rifle</button>
+      </div>
+      <div class="weapon-category">
+        <h3>Explosive</h3>
+        <button data-weapon="grenade-launcher">Grenade Launcher</button>
+        <button data-weapon="rpg">RPG-7</button>
+        <button data-weapon="flamethrower">Flamethrower</button>
+        <button data-weapon="toxic-spitter">Toxic Spitter</button>
+        <button data-weapon="cluster-launcher">Cluster Launcher</button>
+      </div>
+      <div class="weapon-category">
+        <h3>Sci-Fi</h3>
+        <button data-weapon="laser-rifle">Laser Rifle</button>
+        <button data-weapon="plasma-gun">Plasma Gun</button>
+        <button data-weapon="tesla-cannon">Tesla Cannon</button>
+        <button data-weapon="gravity-gun">Gravity Gun</button>
+        <button data-weapon="black-hole-gun">Black Hole Gun</button>
+      </div>
+    </div>
+
+  
+    <div id="bombUI">
+      <button class="bomb-btn" data-bomb="smoke">💨</button>
+      <button class="bomb-btn" data-bomb="fire">🔥</button>
+      <button class="bomb-btn" data-bomb="gravity">🌀</button>
+      <button class="bomb-btn" data-bomb="nuke">☢️</button>
+    </div>
+
+    <div id="vehicleUI" style="display: none;">
+      <button id="exitVehicle">Exit Vehicle</button>
+      <div id="vehicleHP">Vehicle HP: 100</div>
+    </div>
+  </div>
+
+  <div id="shop" style="display: none;">
+    <h2>SHOP</h2>
+    <div class="shop-tabs">
+      <button class="tab-btn active" data-tab="weapons">WEAPONS</button>
+      <button class="tab-btn" data-tab="allies">ALLIES</button>
+      <button class="tab-btn" data-tab="upgrades">UPGRADES</button>
+    </div>
+    
+    <div class="tab-content active" data-tab="weapons">
+      <h3>WEAPONS (100 COINS EACH)</h3>
+      <div id="weaponShop" class="weapon-grid">
+        <button class="shop-item" data-weapon="dual-beretta" data-price="100">Dual Berettas - 100¢</button>
+        <button class="shop-item" data-weapon="revolver" data-price="100">Revolver - 100¢</button>
+        <button class="shop-item" data-weapon="uzi" data-price="100">Uzi - 100¢</button>
+        <button class="shop-item" data-weapon="ak47" data-price="100">AK-47 - 100¢</button>
+        <button class="shop-item" data-weapon="shotgun" data-price="100">Shotgun - 100¢</button>
+        <button class="shop-item" data-weapon="auto-shotgun" data-price="100">Auto-Shotgun - 100¢</button>
+        <button class="shop-item" data-weapon="minigun" data-price="100">Minigun - 100¢</button>
+        <button class="shop-item" data-weapon="sniper" data-price="100">Sniper - 100¢</button>
+        <button class="shop-item" data-weapon="rpg" data-price="100">RPG-7 - 100¢</button>
+        <button class="shop-item" data-weapon="flamethrower" data-price="100">Flamethrower - 100¢</button>
+      </div>
+    </div>
+    
+    <div class="tab-content" data-tab="allies">
+      <h3>HIRE ALLIES (Max 5)</h3>
+      <button class="shop-item" id="buyMedic" data-ally="medic" data-price="200">Medic (Heals 5 HP/s) - 200¢</button>
+      <button class="shop-item" id="buyGunner" data-ally="gunner" data-price="300">Gunner (High DPS) - 300¢</button>
+      <button class="shop-item" id="buyTank" data-ally="tank" data-price="500">Tank (Shield) - 500¢</button>
+      <button class="shop-item" id="buySniper" data-ally="sniper" data-price="400">Sniper (Long Range) - 400¢</button>
+    </div>
+    
+    <div class="tab-content" data-tab="upgrades">
+      <h3>UPGRADES</h3>
+      <button class="shop-item" data-upgrade="hp" data-price="150">Max HP +50 - 150¢</button>
+      <button class="shop-item" data-upgrade="damage" data-price="200">Damage +10% - 200¢</button>
+      <button class="shop-item" data-upgrade="speed" data-price="180">Speed +20% - 180¢</button>
+      <button class="shop-item" data-upgrade="firerate" data-price="250">Fire Rate +15% - 250¢</button>
+      <button class="shop-item" id="buyAdminAccess" data-admin="unlock" data-price="10000" style="background:#9900ff;">ADMIN ACCESS - 10000¢</button>
+    </div>
+    
+    <div class="shop-footer">
+      <div class="gold-display">COINS: <span id="shopGold">0</span></div>
+      <button id="closeShop" class="retro-btn">CLOSE</button>
+    </div>
+  </div>
+
+  <style>
+    #closeShopFromGame {
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      z-index: 1999;
+      display: none;
+    }
+  </style>
+
+  <div id="adminConsole" style="display: none;">
+    <h3>Admin Console (Level: <span id="adminLevel">0</span>)</h3>
+    <input type="text" id="consoleInput" placeholder="Enter command...">
+    <button id="executeCmd">Execute</button>
+    <div id="consoleOutput"></div>
+    <button id="closeConsole">Close (~)</button>
+  </div>
+
+  <div id="pauseMenu" style="display: none;">
+    <h2>PAUSED</h2>
+    <button id="resumeBtn" class="retro-btn">RESUME</button>
+    <button id="shopPauseBtn" class="retro-btn">SHOP</button>
+    <button id="settingsPauseBtn" class="retro-btn">SETTINGS</button>
+    <button id="quitBtn" class="retro-btn">QUIT GAME</button>
+  </div>
+
+  <div id="gameover" style="display: none;">
+    <h1>GAME OVER</h1>
+    <div class="stats">
+      <p>WAVE REACHED: <span id="finalWave">0</span></p>
+      <p>COINS EARNED: <span id="finalGold">0</span></p>
+      <p>ENEMIES KILLED: <span id="finalKills">0</span></p>
+    </div>
+    <button class="retro-btn" onclick="location.reload()">PLAY AGAIN</button>
+    <button class="retro-btn" onclick="location.reload()">MAIN MENU</button>
+  </div>
+
+  <div id="domainEffect" style="display: none;"></div>
+
+  <div id="miniGame" style="display: none;">
+    <h2>MINI GAME - COLLECT COINS</h2>
+    <canvas id="miniGameCanvas" width="600" height="400" style="border: 4px solid #fff; background: #000; margin: 20px auto; display: block;"></canvas>
+    <div style="text-align: center; margin-top: 20px;">
+      <p>Score: <span id="miniGameScore">0</span></p>
+      <button id="miniGameClose" class="retro-btn">BACK TO MENU</button>
+    </div>
+  </div>
+
+
+  <script src="core.js"></script>
+</body>
+</html>
